@@ -39,18 +39,8 @@
                       {{ slide.subtitle }}
                     </p>
                     <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-                      <button
-                        @click="slide.primaryButton.action"
-                        class="btn btn-tech-blue btn-lg me-3"
-                      >
-                        {{ slide.primaryButton.text }}
-                      </button>
-                      <button
-                        @click="slide.secondaryButton.action"
-                        class="btn btn-outline-light btn-lg"
-                      >
-                        {{ slide.secondaryButton.text }}
-                      </button>
+                      <a href="javascript:void(0);" class="start-learn-btn">立即学习</a>
+                      <a href="javascript:void(0);" class="learn-more-btn">了解更多</a>
                     </div>
                   </div>
                 </div>
@@ -373,7 +363,44 @@ onMounted(() => {
 }
 
 .hero-buttons {
-  margin-bottom: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* 按钮共同样式 */
+.learn-more-btn,
+.start-learn-btn {
+  border: 1px solid #1e7f98;
+  border-radius: 25px;
+  padding: 8px 24px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+/* 立即学习按钮 - 使用更高的优先级 */
+.start-learn-btn {
+  margin-right: 1rem !important;
+  background-color: #1e7f98 !important;
+  color: #000 !important;
+  border-color: #1e7f98 !important;
+}
+
+.start-learn-btn:hover,
+.start-learn-btn:active {
+  background-color: #1e7f98 !important;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+/* 了解更多按钮 */
+.learn-more-btn {
+  color: #1e7f98;
+  background-color: transparent;
+}
+
+.learn-more-btn:hover {
+  text-decoration: none;
+  color: #1e7f98;
 }
 
 .btn-tech-blue {

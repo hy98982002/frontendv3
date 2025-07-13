@@ -143,6 +143,12 @@ onUnmounted(() => {
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0);">
+              <i class="iconfont icon-huangguan crown-icon"></i>
+              会员专区
+            </a>
+          </li>
           <li class="nav-item active">
             <a class="nav-link" href="javascript:void(0);">
               <span class="nav-underline">首页</span>
@@ -204,8 +210,9 @@ onUnmounted(() => {
           </form>
 
           <!-- 购物车图标 -->
-          <a href="javascript:void(0);" class="text-dark me-3" @click="openCart">
-            <i class="fas fa-shopping-cart nav-cart-icon"></i>
+          <a href="javascript:void(0);" class="text-dark me-3 cart-link" @click="openCart">
+            <i class="iconfont icon-gouwuche nav-cart-icon"></i>
+            <span class="cart-underline"></span>
           </a>
 
           <!-- 大屏幕显示的登录注册按钮 -->
@@ -246,7 +253,14 @@ onUnmounted(() => {
   outline: none;
 }
 
-/* 🎯 任务1-4: 放大镜按钮样式 */
+/* 购物车图标样式 */
+.nav-cart-icon {
+  font-size: 22px;
+  color: #000;
+  margin-right: -2px;
+}
+
+/* �� 任务1-4: 放大镜按钮样式 */
 .search-btn-inside {
   /* 任务1: 去除矩形方框 */
   background: none;
@@ -399,13 +413,6 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 
-/* 购物车图标样式 */
-.nav-cart-icon {
-  font-size: 22px;
-  color: #000;
-  margin-right: -2px;
-}
-
 /* 移除hover效果 */
 .nav-cart-icon:hover {
   transform: none;
@@ -449,32 +456,31 @@ onUnmounted(() => {
   transform: translateX(-50px);
 }
 
-/* 登录注册按钮样式 */
+/* 登录按钮样式 */
 .btn-login-fix {
-  border-color: #333;
-  color: #333;
+  width: 70px; /* 这里控制登录按钮的宽度，可以调整 */
   transition: all 0.3s ease;
-  border-radius: 5px;
-  padding: 0.375rem 1.5rem;
 }
 
-.btn-login-fix:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  border-color: #000;
-  color: #000;
+.btn-login-fix:hover,
+.btn-login-fix:active {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
 }
 
+/* 注册按钮样式 */
 .btn-register {
-  background-color: #333;
-  border-color: #333;
+  width: 95px; /* 这里控制注册按钮的宽度，可以调整 */
+  background-color: #000 !important; /* 纯黑背景 */
+  border-color: #000 !important;
+  color: #fff !important;
   transition: all 0.3s ease;
-  border-radius: 5px;
-  padding: 0.375rem 1.5rem;
 }
 
 .btn-register:hover {
-  background-color: #000;
-  border-color: #000;
+  background-color: #333333 !important; /* 略微变灰的颜色，可以调整 */
+  border-color: #333333 !important;
 }
 
 /* 移动端优化 */
@@ -484,5 +490,35 @@ onUnmounted(() => {
     justify-content: space-between;
     margin-top: 1rem;
   }
+}
+
+/* 购物车图标和下划线样式 */
+.cart-link {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-underline {
+  position: absolute;
+  bottom: 5px; /* 这里控制横线和图标的距离 */
+  left: 0;
+  width: 100%;
+  height: 1.5px; /* 这里控制横线的粗细 */
+  background-color: #000; /* 这里控制横线的颜色 */
+  transform: translateX(1px);
+}
+
+.crown-icon {
+  /* 渐变色设置 - 您可以调整颜色和透明度 */
+  background: linear-gradient(
+    135deg,
+    rgba(240, 105, 14, 1) 0%,
+    /* 起始颜色 f0690e 带透明度0.8 */ rgba(248, 160, 92, 0.6) 100%
+  ); /* 结束颜色 f8a05c 带透明度0.6 */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  /* 可选：调整图标大小 */
+  font-size: 18px;
 }
 </style>

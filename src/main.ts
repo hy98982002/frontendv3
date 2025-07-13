@@ -5,9 +5,13 @@ import './assets/fonts-clarity.css'
 // import './assets/iconfont.css'
 import App from './App.vue'
 import router from './router'
-import pinia from './store'
+import { createPinia } from 'pinia'
+
+// 引入阿里图标样式
+import './assets/icons/font/iconfont.css'
 
 const app = createApp(App)
+const pinia = createPinia()
 
 app.use(router)
 app.use(pinia)

@@ -170,12 +170,13 @@ const handleVipToggle = () => {
 }
 
 .stage-tab-btn.vip-btn .fas.fa-crown {
-  /* 皇冠图标：淡雅的橙黄渐变 */
-  background: linear-gradient(135deg, #eeb18e, #f9d7b2);
+  /* 渐变颜色可调：起始色#f0690e，结束色#f8a05c，透明度分别为1和0.6 */
+  background: linear-gradient(135deg, rgba(240, 105, 14, 1) 0%, rgba(248, 160, 92, 0.6) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 1px 2px rgba(238, 177, 142, 0.2));
+  filter: drop-shadow(0 1px 2px rgba(240, 105, 14, 0.25));
+  font-size: 18px; /* 您可以自行调整图标大小 */
 }
 
 /* Hover时皇冠图标变为深色调 */
