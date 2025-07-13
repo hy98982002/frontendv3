@@ -171,7 +171,7 @@ const handleVipToggle = () => {
 
 .stage-tab-btn.vip-btn .fas.fa-crown {
   /* 渐变颜色可调：起始色#f0690e，结束色#f8a05c，透明度分别为1和0.6 */
-  background: linear-gradient(135deg, rgba(240, 105, 14, 1) 0%, rgba(248, 160, 92, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(240, 105, 14, 1) 0%, rgba(246, 151, 79, 0.9) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

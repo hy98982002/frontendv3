@@ -22,10 +22,12 @@
           <p class="card-text">{{ course.title }}</p>
 
           <!-- 评分显示 -->
-          <div v-if="course.rating && course.reviewCount" class="d-flex align-items-center mt-2">
-            <span class="rating-number-clear me-1">{{ course.rating }}</span>
+          <div v-if="course.rating" class="d-flex align-items-center mt-2">
+            <span class="rating-number-clear me-1">{{ course.rating.toFixed(1) }}</span>
             <StarRating :rating="course.rating" size="small" class="me-2" />
-            <span class="review-count-clear">({{ course.reviewCount }})</span>
+            <span v-if="displayReviewCount" class="review-count-clear"
+              >({{ displayReviewCount }})</span
+            >
           </div>
         </div>
 
@@ -160,6 +162,11 @@ const levelStyleClass = computed(() => {
 })
 
 // 星级评分现在使用自定义StarRating组件，不再需要getStarClass函数
+
+// Add displayReviewCount computed for rating fallback
+const displayReviewCount = computed(() => {
+  return course.value.reviewCount || course.value.learnerCount || course.value.enrolled || 0
+})
 
 // 事件处理函数
 const handleCardClick = () => {
