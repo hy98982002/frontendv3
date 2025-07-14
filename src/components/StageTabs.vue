@@ -63,6 +63,14 @@ const handleVipToggle = () => {
 </script>
 
 <style scoped>
+/* CSS变量定义 - 用于调整会员专区按钮渐变背景的透明度 */
+:root {
+  --vip-active-opacity-start: 0.9; /* 起始色透明度 */
+  --vip-active-opacity-end: 0.9; /* 结束色透明度 */
+  --vip-active-hover-opacity-start: 0.95; /* 悬停时起始色透明度 */
+  --vip-active-hover-opacity-end: 0.95; /* 悬停时结束色透明度 */
+}
+
 .stage-tabs-container {
   padding: 0.5rem 0;
 }
@@ -133,40 +141,46 @@ const handleVipToggle = () => {
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
+/* 会员专区按钮激活状态 - 使用项目落地专区相同的渐变色 */
 .stage-tab-btn.vip-btn.active {
-  /* 激活状态：稍强的淡橙黄渐变，保持淡雅 */
+  /* 渐变色：起始色#f0690e，结束色#f8a05c，透明度可调 */
   background: linear-gradient(
     135deg,
-    rgba(238, 177, 142, 0.3) 0%,
-    rgba(244, 201, 160, 0.35) 25%,
-    rgba(249, 215, 178, 0.4) 50%,
-    rgba(253, 229, 196, 0.45) 75%,
-    rgba(255, 240, 210, 0.5) 100%
+    rgba(240, 105, 14, var(--vip-active-opacity-start, 0.9)),
+    rgba(248, 160, 92, var(--vip-active-opacity-end, 0.9))
   );
-  border-color: #f47e30;
-  color: #836349;
+  border-color: #f0690e;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 25px rgba(238, 177, 142, 0.2), 0 3px 10px rgba(249, 215, 178, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 25px rgba(240, 105, 14, 0.2), 0 3px 10px rgba(248, 160, 92, 0.15);
+  text-shadow: none;
   font-weight: 700;
 }
 
 .stage-tab-btn.vip-btn.active:hover {
-  /* 激活+Hover：最强但仍淡雅的效果 */
   background: linear-gradient(
     135deg,
-    rgba(238, 177, 142, 0.35) 0%,
-    rgba(244, 201, 160, 0.4) 20%,
-    rgba(249, 215, 178, 0.45) 45%,
-    rgba(253, 229, 196, 0.5) 70%,
-    rgba(255, 245, 220, 0.55) 100%
+    rgba(240, 105, 14, var(--vip-active-hover-opacity-start, 0.95)),
+    rgba(248, 160, 92, var(--vip-active-hover-opacity-end, 0.95))
   );
-  color: #7a5d42;
-  box-shadow: 0 8px 30px rgba(238, 177, 142, 0.25), 0 4px 12px rgba(249, 215, 178, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+  color: #fff;
+  box-shadow: 0 8px 30px rgba(240, 105, 14, 0.25), 0 4px 12px rgba(248, 160, 92, 0.2);
+  text-shadow: none;
   font-weight: 700;
+}
+
+/* 会员专区按钮鼠标按下状态 */
+.stage-tab-btn.vip-btn:active {
+  /* 渐变色：起始色#f0690e，结束色#f8a05c，透明度可调 */
+  background: linear-gradient(
+    135deg,
+    rgba(240, 105, 14, var(--vip-active-opacity-start, 0.9)),
+    rgba(248, 160, 92, var(--vip-active-opacity-end, 0.9))
+  );
+  color: #fff;
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(240, 105, 14, 0.2);
+  border-color: #f0690e;
 }
 
 .stage-tab-btn.vip-btn .fas.fa-crown {
@@ -189,13 +203,15 @@ const handleVipToggle = () => {
   filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.3));
 }
 
-.stage-tab-btn.vip-btn.active .fas.fa-crown {
+/* 激活状态下皇冠图标变为白色 */
+.stage-tab-btn.vip-btn.active .fas.fa-crown,
+.stage-tab-btn.vip-btn:active .fas.fa-crown {
   background: none;
   -webkit-background-clip: unset;
   -webkit-text-fill-color: unset;
   background-clip: unset;
-  color: #8d6d4f;
-  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.4));
+  color: #ffffff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
 }
 
 /* 按钮点击动效 */
