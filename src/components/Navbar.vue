@@ -143,12 +143,6 @@ onUnmounted(() => {
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="javascript:void(0);">
-              <i class="iconfont icon-huangguan crown-icon"></i>
-              会员专区
-            </a>
-          </li>
           <li class="nav-item active">
             <a class="nav-link" href="javascript:void(0);">
               <span class="nav-underline">首页</span>
