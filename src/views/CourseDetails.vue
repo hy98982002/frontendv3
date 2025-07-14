@@ -1,8 +1,9 @@
 <!-- CourseDetails.vue - 课程详情主页面组件 -->
 <template>
   <div class="course-details-page">
-    <!-- 使用当前项目的导航栏 -->
-    <Navbar />
+    <!-- 根据登录状态切换导航栏 -->
+    <AuthNavbar v-if="authStore.isAuthenticated" />
+    <Navbar v-else />
 
     <!-- 面包屑导航 -->
     <BreadcrumbNav :items="breadcrumbItems" />
@@ -36,14 +37,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import Navbar from '../components/Navbar.vue'
+import AuthNavbar from '../components/AuthNavbar.vue'
 import BreadcrumbNav from '../components/BreadcrumbNav.vue'
 import CourseHeroCard from '../components/CourseHeroCard.vue'
 import CourseTabs from '../components/CourseTabs.vue'
 import SidebarPricingCard from '../components/SidebarPricingCard.vue'
+import { useAuthStore } from '../store/authStore'
 import type { BreadcrumbItem, CourseInfo } from '../types'
 
 // 导入课程封面图片
 import py04Image from '@/assets/images/course-details/py04.jpg'
+
+// 使用 auth store
+const authStore = useAuthStore()
 
 // 面包屑数据
 const breadcrumbItems = ref<BreadcrumbItem[]>([

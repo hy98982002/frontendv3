@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import Navbar from './components/Navbar.vue'
+import AuthNavbar from './components/AuthNavbar.vue'
 import { useUIStore } from './store/uiStore'
+import { useAuthStore } from './store/authStore'
 
 const uiStore = useUIStore()
+const authStore = useAuthStore()
 const showLoginModal = ref(false)
 const showRegisterModal = ref(false)
 
@@ -29,8 +32,13 @@ onMounted(() => {
 
 <template>
   <div id="app">
-    <!-- 导航栏 -->
-    <Navbar @openLoginModal="handleOpenLoginModal" @openRegisterModal="handleOpenRegisterModal" />
+    <!-- 根据登录状态切换导航栏 -->
+    <AuthNavbar v-if="authStore.isAuthenticated" />
+    <Navbar
+      v-else
+      @openLoginModal="handleOpenLoginModal"
+      @openRegisterModal="handleOpenRegisterModal"
+    />
 
     <!-- 主内容区域 -->
     <main class="main-content">
