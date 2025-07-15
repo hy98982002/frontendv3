@@ -8,6 +8,7 @@ export const useUIStore = defineStore('ui', () => {
 
   // 弹窗状态
   const isLoginModalOpen = ref(false)
+  const isRegisterModalOpen = ref(false)
   const isCartModalOpen = ref(false)
   const isProfileModalOpen = ref(false)
 
@@ -31,14 +32,16 @@ export const useUIStore = defineStore('ui', () => {
   const isDesktop = ref(true)
 
   // 通知消息
-  const notifications = ref<Array<{
-    id: string
-    type: 'success' | 'error' | 'warning' | 'info'
-    title: string
-    message: string
-    autoClose?: boolean
-    duration?: number
-  }>>([])
+  const notifications = ref<
+    Array<{
+      id: string
+      type: 'success' | 'error' | 'warning' | 'info'
+      title: string
+      message: string
+      autoClose?: boolean
+      duration?: number
+    }>
+  >([])
 
   // Actions
 
@@ -58,10 +61,20 @@ export const useUIStore = defineStore('ui', () => {
   // 弹窗相关
   const openLoginModal = () => {
     isLoginModalOpen.value = true
+    isRegisterModalOpen.value = false // 确保其他模态框关闭
   }
 
   const closeLoginModal = () => {
     isLoginModalOpen.value = false
+  }
+
+  const openRegisterModal = () => {
+    isRegisterModalOpen.value = true
+    isLoginModalOpen.value = false // 确保其他模态框关闭
+  }
+
+  const closeRegisterModal = () => {
+    isRegisterModalOpen.value = false
   }
 
   const openCartModal = () => {
@@ -82,6 +95,7 @@ export const useUIStore = defineStore('ui', () => {
 
   const closeAllModals = () => {
     isLoginModalOpen.value = false
+    isRegisterModalOpen.value = false
     isCartModalOpen.value = false
     isProfileModalOpen.value = false
   }
@@ -126,9 +140,8 @@ export const useUIStore = defineStore('ui', () => {
   }
 
   const prevCarouselSlide = (totalSlides: number) => {
-    carouselActiveIndex.value = carouselActiveIndex.value === 0 
-      ? totalSlides - 1 
-      : carouselActiveIndex.value - 1
+    carouselActiveIndex.value =
+      carouselActiveIndex.value === 0 ? totalSlides - 1 : carouselActiveIndex.value - 1
   }
 
   // 主题相关
@@ -171,15 +184,15 @@ export const useUIStore = defineStore('ui', () => {
       autoClose,
       duration
     }
-    
+
     notifications.value.push(notification)
-    
+
     if (autoClose) {
       setTimeout(() => {
         removeNotification(id)
       }, duration)
     }
-    
+
     return id
   }
 
@@ -219,10 +232,10 @@ export const useUIStore = defineStore('ui', () => {
       if (savedDarkMode !== null) {
         isDarkMode.value = savedDarkMode === 'true'
       }
-      
+
       // 初始化响应式断点
       updateBreakpoint(window.innerWidth)
-      
+
       // 监听窗口大小变化
       window.addEventListener('resize', () => {
         updateBreakpoint(window.innerWidth)
@@ -235,6 +248,7 @@ export const useUIStore = defineStore('ui', () => {
     isNavbarCollapsed,
     currentNavItem,
     isLoginModalOpen,
+    isRegisterModalOpen,
     isCartModalOpen,
     isProfileModalOpen,
     isLoading,
@@ -254,6 +268,8 @@ export const useUIStore = defineStore('ui', () => {
     collapseNavbar,
     openLoginModal,
     closeLoginModal,
+    openRegisterModal,
+    closeRegisterModal,
     openCartModal,
     closeCartModal,
     openProfileModal,
@@ -279,4 +295,4 @@ export const useUIStore = defineStore('ui', () => {
     showInfo,
     initializeUI
   }
-}) 
+})

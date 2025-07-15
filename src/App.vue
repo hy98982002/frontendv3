@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import Navbar from './components/Navbar.vue'
 import AuthNavbar from './components/AuthNavbar.vue'
+import LoginModal from './components/LoginModal.vue'
+import RegisterModal from './components/RegisterModal.vue'
 import { useUIStore } from './store/uiStore'
 import { useAuthStore } from './store/authStore'
 
@@ -14,15 +16,34 @@ const showRegisterModal = ref(false)
 const handleOpenLoginModal = () => {
   showLoginModal.value = true
   console.log('打开登录模态框')
-  // 这里可以集成到uiStore
-  uiStore.openLoginModal()
 }
 
 // 处理注册模态框打开
 const handleOpenRegisterModal = () => {
   showRegisterModal.value = true
   console.log('打开注册模态框')
-  // 这里可以添加注册模态框的逻辑
+}
+
+// 处理登录模态框关闭
+const handleCloseLoginModal = () => {
+  showLoginModal.value = false
+}
+
+// 处理注册模态框关闭
+const handleCloseRegisterModal = () => {
+  showRegisterModal.value = false
+}
+
+// 从登录切换到注册
+const handleSwitchToRegister = () => {
+  showLoginModal.value = false
+  showRegisterModal.value = true
+}
+
+// 从注册切换到登录
+const handleSwitchToLogin = () => {
+  showRegisterModal.value = false
+  showLoginModal.value = true
 }
 
 onMounted(() => {
@@ -44,6 +65,20 @@ onMounted(() => {
     <main class="main-content">
       <RouterView />
     </main>
+
+    <!-- 登录模态框 -->
+    <LoginModal
+      v-if="showLoginModal"
+      @close="handleCloseLoginModal"
+      @openRegister="handleSwitchToRegister"
+    />
+
+    <!-- 注册模态框 -->
+    <RegisterModal
+      v-if="showRegisterModal"
+      @close="handleCloseRegisterModal"
+      @openLogin="handleSwitchToLogin"
+    />
   </div>
 </template>
 
